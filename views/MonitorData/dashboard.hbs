@@ -1,0 +1,48 @@
+<h1>Dashboard</h1>
+
+<script>
+    window.onload = function () {
+        alert("hii");
+        var socket = io();
+        console.log("socket:" + socket)
+        socket.on('Data', function (data) {
+            var len = data.length;
+            console.log("data:" + len)
+            console.log("data:" + data[len - 1])
+            console.log("data:" + JSON.stringify(data[len - 1]))
+            var obj = data[len - 1];
+            var count = Object.keys(obj).length;
+            var HTML = `<table class="table" width=100%><tr>`;
+            HTML += `<thead class="thead-light">
+                    <tr>
+                        <th scope="col" align=center>Name</th>
+                        <th scope="col" align=center>Host</th>
+                        <th scope="col" align=center>Status</th>
+                        <th scope="col">Status Message</th>
+                        <th scope="col" align=center>Last Checked</th>
+                    </tr>
+                </thead>`;
+            HTML += "<td align=center>" + obj["name"] + "</td>";
+            HTML += "<td align=center>" + obj["host"] + "</td>";
+            HTML += "<td align=center  style='background-color:" + obj["color"] + "'>" + obj["status"] + "</td>";
+            HTML += "<td align=center>" + obj["statusMessage"] + "</td>";
+            HTML += "<td align=center>" + obj["duration"] + "</td>";
+
+
+            HTML += "</tr></table>";
+            document.getElementById("outputDiv").innerHTML = HTML;
+        });
+
+    }
+
+</script>
+
+<div id="template"></div>
+<section style='background-color:#f5f5f5;'> 
+    <div class="dashboard-panel with-title" style="min-height: 0px;">
+        <h2 class="panel-title">Test App</h2>
+        <div class="panel-element-row">
+            <h3 class="dashboard-element-title">HealthCheck Monitoring</h3>
+            <div id="outputDiv"></div> 
+        </div>
+</section>

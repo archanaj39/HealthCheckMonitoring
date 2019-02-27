@@ -1,0 +1,14 @@
+<h1>Health Check Details</h1> 
+<section class="get"> 
+    <div>
+        {{# each items }}
+            <article class="item">
+                <div>Name: {{ this.name }}</div>
+                <div>Description: {{ this.discription }}</div>
+                <div>Check Type: {{ this.checkType }}</div>
+                <div>Host: {{ this.host }}</div>
+            </article>
+        {{/each}}
+    </div>
+</section>
+ 
